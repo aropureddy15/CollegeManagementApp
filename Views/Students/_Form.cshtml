@@ -1,0 +1,8 @@
+@model Student
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Id" />
+<div class="mb-3"><label asp-for="FullName" class="form-label"></label><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Department" class="form-label"></label><input asp-for="Department" class="form-control" /></div>
+<div class="mb-3"><label asp-for="EnrollmentDate" class="form-label"></label><input asp-for="EnrollmentDate" type="date" class="form-control" /><span asp-validation-for="EnrollmentDate" class="text-danger"></span></div>
+<button class="btn btn-primary" type="submit">Save</button> <a asp-action="Index" class="btn btn-secondary">Cancel</a>

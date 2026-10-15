@@ -1,0 +1,10 @@
+@model IEnumerable<CartItem>
+@{ ViewData["Title"] = "My Cart"; }
+<h1>Admin Course Cart</h1>
+@if (!Model.Any()) { <p>Your cart is empty. Go to Courses and select Add to cart.</p> } else {
+<table class="table table-striped"><thead><tr><th>Course</th><th>Fee</th><th>Added (UTC)</th><th></th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.Course?.Title</td><td>@item.Course?.Fee.ToString("C")</td><td>@item.AddedAtUtc.ToString("u")</td><td>
+<form asp-action="Remove" method="post"><input type="hidden" name="id" value="@item.Id" /><button class="btn btn-sm btn-danger" type="submit">Remove</button></form></td></tr> }
+</tbody></table>
+}
+<a asp-controller="Courses" asp-action="Index" class="btn btn-secondary">Browse Courses</a>

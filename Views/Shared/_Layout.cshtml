@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - College Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+ <div class="container">
+  <a class="navbar-brand" asp-controller="Home" asp-action="Index">College Management</a>
+  <div class="navbar-nav me-auto">
+   <a class="nav-link" asp-controller="Students" asp-action="Index">Students</a>
+   <a class="nav-link" asp-controller="Courses" asp-action="Index">Courses</a>
+   @if (User.IsInRole("Admin")) { <a class="nav-link" asp-controller="Cart" asp-action="Index">My Cart</a> }
+  </div>
+  <div class="navbar-nav">
+   @if (User.Identity?.IsAuthenticated == true) {
+    <span class="navbar-text text-white me-3">@User.Identity.Name</span>
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+      <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+    </form>
+   } else {
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+   }
+  </div>
+ </div>
+</nav>
+<main class="container py-4">
+ @if (TempData["Message"] is string msg) { <div class="alert alert-info">@msg</div> }
+ @RenderBody()
+</main>
+<footer class="container text-muted border-top py-3">College Management · Dates stored in UTC unless specified.</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

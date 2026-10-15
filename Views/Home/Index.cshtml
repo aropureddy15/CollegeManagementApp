@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Home";
+}
+<div class="p-5 mb-4 bg-light rounded-3">
+ <h1>College Management System</h1>
+ <p class="lead">Manage students and courses with role-based access and an AWS RDS MySQL database.</p>
+ @if (User.Identity?.IsAuthenticated != true) {
+   <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+ } else {
+   <a class="btn btn-primary me-2" asp-controller="Students" asp-action="Index">View Students</a>
+   <a class="btn btn-outline-primary" asp-controller="Courses" asp-action="Index">View Courses</a>
+ }
+</div>

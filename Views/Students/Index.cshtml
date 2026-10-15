@@ -1,0 +1,17 @@
+@model IEnumerable<Student>
+@{ ViewData["Title"] = "Students"; }
+<div class="d-flex justify-content-between align-items-center mb-3">
+ <h1>Students</h1>
+ @if (User.IsInRole("Admin")) { <a class="btn btn-primary" asp-action="Create">Add Student</a> }
+</div>
+<table class="table table-striped">
+<thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Enrollment date</th><th></th></tr></thead>
+<tbody>
+@foreach (var s in Model) {
+<tr><td>@s.FullName</td><td>@s.Email</td><td>@s.Department</td><td>@s.EnrollmentDate.ToString("yyyy-MM-dd")</td>
+<td><a asp-action="Details" asp-route-id="@s.Id">Details</a>
+@if (User.IsInRole("Admin")) {
+ <span> | </span><a asp-action="Edit" asp-route-id="@s.Id">Edit</a><span> | </span><a asp-action="Delete" asp-route-id="@s.Id">Delete</a>
+}</td></tr>
+}
+</tbody></table>
